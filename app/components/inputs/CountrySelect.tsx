@@ -21,8 +21,6 @@ interface CountrySelectProps {
 const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange }) => {
   const { getAll } = useCountries();
 
-  console.log(getAll());
-
   return (
     <div>
       <Select
