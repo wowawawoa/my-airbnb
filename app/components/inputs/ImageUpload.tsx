@@ -45,6 +45,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
                   style={{ objectFit: "contain" }}
                   src={value}
                   alt="House"
+                  sizes="100vw"
                 />
               </div>
             )}
