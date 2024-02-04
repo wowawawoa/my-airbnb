@@ -5,13 +5,13 @@ import { format } from "date-fns";
 import React, { useCallback, useMemo } from "react";
 import Image from "next/image";
 
-import { SafeListings, SafeUser } from "@/app/types";
+import { SafeListing, SafeUser } from "@/app/types";
 import { Reservation } from "@prisma/client";
 import useCountries from "@/app/hooks/useCountries";
 import HeartButton from "@/app/components/HeartButton";
 
 interface ListingCardProps {
-  data: SafeListings;
+  data: SafeListing;
   currentUser?: SafeUser | null;
   onAction?: (id: string) => void;
   disabled?: boolean;

@@ -3,7 +3,7 @@
 import Modal from "./Modal";
 import useRentModal from "@/app/hooks/useRentModal";
 import Heading from "../Heading";
-import { categories } from "../navbar/Categories";
+import { categories } from "@/app/utils/constants";
 import CategoryInput from "../inputs/CategoryInput";
 import CountrySelect from "../inputs/CountrySelect";
 import Counter from "../inputs/Counter";
