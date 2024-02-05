@@ -5,10 +5,11 @@ import { format } from "date-fns";
 import React, { useCallback, useMemo } from "react";
 import Image from "next/image";
 
-import { SafeListing, SafeUser } from "@/app/types";
-import { Reservation } from "@prisma/client";
+import { SafeListing, SafeUser, SafeReservation } from "@/app/types";
 import useCountries from "@/app/hooks/useCountries";
 import HeartButton from "@/app/components/HeartButton";
+import { on } from "events";
+import Button from "../Button";
 
 interface ListingCardProps {
   data: SafeListing;
@@ -16,7 +17,7 @@ interface ListingCardProps {
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionId?: string;
-  reservation?: Reservation;
+  reservation?: SafeReservation;
   actionLabel?: string;
 }
 
@@ -24,11 +25,26 @@ const ListingCard: React.FC<ListingCardProps> = ({
   data,
   currentUser,
   reservation,
+  onAction,
+  disabled,
+  actionId = "",
+  actionLabel,
 }) => {
   const router = useRouter();
   const { getByValue } = useCountries();
 
   const location = getByValue(data.locationValue);
+
+  const handleCancel = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      if (disabled) {
+        return;
+      }
+      onAction?.(actionId);
+    },
+    [disabled, onAction, actionId]
+  );
 
   const price = useMemo(() => {
     if (reservation) {
@@ -76,6 +92,14 @@ const ListingCard: React.FC<ListingCardProps> = ({
           <div className="font-semibold">$ {price}</div>
           {!reservation && <div className="font-light">night</div>}
         </div>
+        {onAction && actionLabel && (
+          <Button
+            onClick={handleCancel}
+            disabled={disabled}
+            small
+            label={actionLabel}
+          />
+        )}
       </div>
     </div>
   );
