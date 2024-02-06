@@ -8,7 +8,6 @@ import Image from "next/image";
 import { SafeListing, SafeUser, SafeReservation } from "@/app/types";
 import useCountries from "@/app/hooks/useCountries";
 import HeartButton from "@/app/components/HeartButton";
-import { on } from "events";
 import Button from "../Button";
 
 interface ListingCardProps {
